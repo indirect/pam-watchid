@@ -1,7 +1,7 @@
-VERSION = 2
+PREFIX ?= /usr/local
 LIBRARY_PREFIX = pam_watchid
 LIBRARY_NAME = $(LIBRARY_PREFIX).so
-DESTINATION = /usr/local/lib/pam
+DESTINATION = $(addprefix $(PREFIX), /lib/pam)
 TARGET = apple-darwin20.1.0
 
 all:
@@ -11,4 +11,4 @@ all:
 
 install: all
 	mkdir -p $(DESTINATION)
-	install -o root -g wheel -m 444 $(LIBRARY_NAME) $(DESTINATION)/$(LIBRARY_NAME).$(VERSION)
+	cp $(LIBRARY_NAME) $(DESTINATION)/$(LIBRARY_NAME)
